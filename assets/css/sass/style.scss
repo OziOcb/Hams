@@ -28,40 +28,42 @@ $base__thick: 2px;                        // Thickness of the hamburger elements
 $base__padding: 2px;
 
 // Hamburger Size
-$h_hight: 40px;
-$h_width: 40px;
+$h_hight: 30px;
+$h_width: 30px;
 
 // Hamburger Bars
 $h_bar-h: $base__thick;                   // Thickness of bars
 
 // Background
-$h_bg: false;                              // Do you want the hamburger to have a background??
+$h_bg: true;                              // Do you want the hamburger to have a background??
 $h_bg-color: rgba(24, 196, 178, 0.3);   // Color of the background
 
 // Border
-$h_bor: false;                             // Do you want the hamburger to have a border??
+$h_bor: false;                            // Do you want the hamburger to have a border??
 $h_bor-thick: $base__thick;               // Thickness of the border
 $h_bor-color: $base__color;               // Color of the border
 $h_bor-radius: 10%;                       // radius of the border
 
 // Transition
-$h_trans-dur: .2s;                        // Transition duration
-$h_trans-dur-50: calc(#{$h_trans-dur} / 2);                        // Transition duration
-$h_trans-dur-33: calc(#{$h_trans-dur} / 3);                        // Transition duration
-$h_trans-timing-fun: linear;              // Transition timing function (ease, ease-in-out, etc.)
+$h_trans-dur: .2s;                              // Transition duration - full
+$h_trans-dur-50: calc(#{$h_trans-dur} / 2);     // Transition duration - 50%
+$h_trans-dur-33: calc(#{$h_trans-dur} / 3);     // Transition duration - 33%
+$h_trans-timing-fun: linear;                    // Transition timing function (ease, ease-in-out, etc.)
 
 //──── Hamburger Base ──────────────────────────────────────────────────────────────────────────────────
 .ham {
-  height: $h_hight;
-  width: $h_width;
-  padding: $base__padding;
-  border-radius: $h_bor-radius;
-  position: relative;
+  &__box {
+    height: $h_hight;
+    width: $h_width;
+    padding: $base__padding;
+    border-radius: $h_bor-radius;
+    position: relative;
 
-  @if $h_bg == true { background: $h_bg-color; }
-  @if $h_bor == true {
-    border: $h_bor-thick solid $h_bor-color;
-    overflow: hidden;
+    @if $h_bg == true { background: $h_bg-color; }
+    @if $h_bor == true {
+      border: $h_bor-thick solid $h_bor-color;
+      overflow: hidden;
+    }
   }
 
   &__bar {
@@ -81,20 +83,21 @@ $h_trans-timing-fun: linear;              // Transition timing function (ease, e
     &--mid { top: calc(50% - #{$base__thick} / 2); }
     &--bottom { bottom: 15%; }
   }
-}
 
-.navbar-toggler:not(.collapsed) {
-  .ham__bar {
-    &--top {
-      top: calc(50% - #{$base__thick} / 2);
-      transform: rotate(45deg);
-    }
-    &--mid {
-      opacity: 0;
-    }
-    &--bottom {
-      bottom: calc(50% - #{$base__thick} / 2);
-      transform: rotate(-45deg);
+
+  &.navbar-toggler:not(.collapsed) {
+    .ham__bar {
+      &--top {
+        top: calc(50% - #{$base__thick} / 2);
+        transform: rotate(45deg);
+      }
+      &--mid {
+        opacity: 0;
+      }
+      &--bottom {
+        bottom: calc(50% - #{$base__thick} / 2);
+        transform: rotate(-45deg);
+      }
     }
   }
 }
@@ -110,15 +113,18 @@ $h_trans-timing-fun: linear;              // Transition timing function (ease, e
 
 //──────────────────────────────────────────────────────────────────────────────────────
 //──── Basic ──────────────────────────────────────────────────────────────────────────────────
-.navbar-toggler:not(.collapsed) {
-  .ham--basic {
+/* ------- Basic-r ------- */
+.ham--basic-r {
+  &.navbar-toggler:not(.collapsed) {
     .ham__bar--mid {
       transform: translate(25px);
     }
   }
+}
 
-  /* ------- Basic-Left ------- */
-  .ham--basic-left {
+/* ------- Basic-L ------- */
+.ham--basic-l {
+  &.navbar-toggler:not(.collapsed) {
     .ham__bar--mid {
       transform: translate(-25px)
     }
@@ -127,19 +133,22 @@ $h_trans-timing-fun: linear;              // Transition timing function (ease, e
 
 //──────────────────────────────────────────────────────────────────────────────────────
 //──── Smooth ───────────────────────────────────────────────────────────────────────────
-.ham--smooth {
+.ham--smooth-r,
+.ham--smooth-l {
   overflow: hidden;
 }
-.navbar-toggler:not(.collapsed) {
-  .ham--smooth {
+/* ------- Smooth-r ------- */
+.ham--smooth-r {
+  &.navbar-toggler:not(.collapsed) {
     .ham__bar--mid {
       opacity: 1;
       width: 0px;
     }
   }
-
-  /* ------- Smooth-left ------- */
-  .ham--smooth-left {
+}
+  /* ------- Smooth-l ------- */
+.ham--smooth-l {
+  &.navbar-toggler:not(.collapsed) {
     .ham__bar--mid {
       transform: translateX(75px);
     }
@@ -162,10 +171,8 @@ $h_trans-timing-fun: linear;              // Transition timing function (ease, e
                   transform   $h_trans-dur-50 $h_trans-timing-fun;
     }
   }
-}
 
-.navbar-toggler:not(.collapsed) {
-  .ham--fold {
+  &.navbar-toggler:not(.collapsed) {
     .ham__bar {
       &--top {
         transition: top         $h_trans-dur-50 $h_trans-timing-fun,
@@ -194,10 +201,48 @@ $h_trans-timing-fun: linear;              // Transition timing function (ease, e
 
     }
   }
+
+  &.navbar-toggler:not(.collapsed) {
+    .ham__bar {
+      &--top {
+
+      }
+      &--bottom {
+
+      }
+    }
+  }
 }
 
-.navbar-toggler:not(.collapsed) {
-  .ham--changeName {
+
+
+
+
+
+
+
+
+
+
+
+
+
+//──────────────────────────────────────────────────────────────────────────────────────
+//──── changeName ───────────────────────────────────────────────────────────────────────────
+.ham--changeName {
+  .ham__bar {
+    &--top {
+
+    }
+    &--mid {
+
+     }
+    &--bottom {
+
+    }
+  }
+
+  &.navbar-toggler:not(.collapsed) {
     .ham__bar {
       &--top {
 

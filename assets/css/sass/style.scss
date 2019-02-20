@@ -100,6 +100,15 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
       }
     }
   }
+
+  /* ------- ham--180 ------- */
+  &.ham--180 {
+    transform: rotate(180deg);
+  }
+  /* ------- ham--180-0 ------- */
+  &.ham--180-0.navbar-toggler:not(.collapsed) {
+    transform: rotate(180deg);
+  }
 }
 
 

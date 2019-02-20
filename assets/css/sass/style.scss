@@ -32,23 +32,26 @@ $h_hight: 30px;
 $h_width: 30px;
 
 // Hamburger Bars
-$h_bar-h: $base__thick;                   // Thickness of bars
+$h_bar-h: $base__thick;                                 // Thickness of bars
 
 // Background
-$h_bg: true;                              // Do you want the hamburger to have a background??
-$h_bg-color: rgba(24, 196, 178, 0.3);   // Color of the background
+$h_bg: true;                                            // Do you want the hamburger to have a background??
+$h_bg-color: rgba(255, 255, 255, 0.2);                 // Color of the background
 
 // Border
-$h_bor: false;                            // Do you want the hamburger to have a border??
-$h_bor-thick: $base__thick;               // Thickness of the border
-$h_bor-color: $base__color;               // Color of the border
-$h_bor-radius: 10%;                       // radius of the border
+$h_bor: false;                                           // Do you want the hamburger to have a border??
+$h_bor-thick: 0px;                                      // Thickness of the border (takes value of $base_thick if it's set to 0px)
+@if $h_bor-thick == 0 { $h_bor-thick: $base__thick; }
+
+$h_bor-color: 0;                                        // Color of the border (takes value of $base_color if it's set to 0)
+@if $h_bor-color == 0 { $h_bor-color: $base__color; }
+$h_bor-radius: 10%;                                     // radius of the border
 
 // Transition
-$h_trans-dur: .2s;                              // Transition duration - full
-$h_trans-dur-50: calc(#{$h_trans-dur} / 2);     // Transition duration - 50%
-$h_trans-dur-33: calc(#{$h_trans-dur} / 3);     // Transition duration - 33%
-$h_trans-timing-fun: linear;                    // Transition timing function (ease, ease-in-out, etc.)
+$h_trans-dur: .2s;                                      // Transition duration - full
+$h_trans-dur-50: calc(#{$h_trans-dur} / 2);             // Transition duration - 50%
+$h_trans-dur-33: calc(#{$h_trans-dur} / 3);             // Transition duration - 33%
+$h_trans-timing-fun: linear;                            // Transition timing function (ease, ease-in-out, etc.)
 
 //──── Hamburger Base ──────────────────────────────────────────────────────────────────────────────────
 .ham {

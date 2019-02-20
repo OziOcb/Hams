@@ -1,0 +1,205 @@
+//──── Base ──────────────────────────────────────────────────────────────────────────────────
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+//──── Bootstrap ──────────────────────────────────────────────────────────────────────────────────
+// Disable Bootstrap's .navbar-toggler default outline on :focus
+.navbar-toggler:focus {
+  outline: none;
+}
+
+// Disable 1px border for navbar with .bg-primary
+// (May be because I've used bootswatch theme)
+.bg-primary {
+  border: 0 !important;
+}
+
+/* ==========================================================================================
+ * HAMBURGER BASE STYLES
+ * ========================================================================================== */
+
+//──── Variables ──────────────────────────────────────────────────────────────────────────────────
+$base__color: #fff;                     // Base color
+$base__thick: 2px;                        // Thickness of the hamburger elements
+$base__padding: 2px;
+
+// Hamburger Bars
+$h_bar-h: $base__thick;                   // Thickness of bars
+
+// Background
+$h_bg: false;                              // Do you want the hamburger to have a background??
+$h_bg-color: rgba(24, 196, 178, 0.3);   // Color of the background
+
+// Border
+$h_bor: false;                             // Do you want the hamburger to have a border??
+$h_bor-thick: $base__thick;               // Thickness of the border
+$h_bor-color: $base__color;               // Color of the border
+$h_bor-radius: 10%;                       // radius of the border
+
+// Transition
+$h_trans-dur: .2s;                        // Transition duration
+$h_trans-dur-50: calc(#{$h_trans-dur} / 2);                        // Transition duration
+$h_trans-dur-33: calc(#{$h_trans-dur} / 3);                        // Transition duration
+$h_trans-timing-fun: linear;              // Transition timing function (ease, ease-in-out, etc.)
+
+//──── Hamburger Base ──────────────────────────────────────────────────────────────────────────────────
+.ham {
+  height: 40px;
+  width: 40px;
+  padding: $base__padding;
+  border-radius: $h_bor-radius;
+  position: relative;
+
+  @if $h_bg == true { background: $h_bg-color; }
+  @if $h_bor == true {
+    border: $h_bor-thick solid $h_bor-color;
+    overflow: hidden;
+  }
+
+  &__bar {
+    display: block;
+    background: $base__color;
+
+    position: absolute;
+    height: $h_bar-h;
+    width: calc(100% - 2 * #{$base__padding});
+
+
+    transition-property: all;
+    transition-duration: $h_trans-dur;
+    transition-timing-function: $h_trans-timing-fun;
+
+    &--top { top: 15%; }
+    &--mid { top: calc(50% - #{$base__thick} / 2); }
+    &--bottom { bottom: 15%; }
+  }
+}
+
+/* ==========================================================================================
+ * HAMBURGER TYPES
+ * ========================================================================================== */
+
+//──── Basic ──────────────────────────────────────────────────────────────────────────────────
+.navbar-toggler:not(.collapsed) {
+  .ham--basic,
+  .ham--basic-left {
+    .ham__bar {
+      &--top {
+        top: calc(50% - #{$base__thick} / 2);
+        transform: rotate(45deg);
+      }
+
+      &--mid {
+        opacity: 0;
+        transform: translate(25px);
+      }
+
+      &--bottom {
+        bottom: calc(50% - #{$base__thick} / 2);
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  // Basic-Left
+  .ham--basic-left {
+    .ham__bar--mid {
+      transform: translate(-25px)
+    }
+  }
+}
+
+//──── Smooth ───────────────────────────────────────────────────────────────────────────
+.ham--smooth,
+.ham--smooth-left {
+  overflow: hidden;
+}
+.navbar-toggler:not(.collapsed) {
+  .ham--smooth,
+  .ham--smooth-left {
+    .ham__bar {
+      &--top {
+        top: calc(50% - #{$base__thick} / 2);
+        transform: rotate(45deg);
+      }
+
+      &--mid {
+        width: 0px;
+      }
+
+      &--bottom {
+        bottom: calc(50% - #{$base__thick} / 2);
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  // Smooth-left
+  .ham--smooth-left {
+    .ham__bar--mid {
+      transform: translateX(75px);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//──── changeName ───────────────────────────────────────────────────────────────────────────
+.ham--changeName {
+  .ham__bar {
+    position: absolute;
+    width: calc(100% - 2 * #{$base__padding});
+
+    &--top {
+      transition: top         $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun,
+                  transform   $h_trans-dur-50 $h_trans-timing-fun;
+    }
+    &--mid {
+      transition: opacity     $h_trans-dur-50 $h_trans-dur-33 $h_trans-timing-fun;
+     }
+    &--bottom {
+      transition: bottom      $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun,
+                  transform   $h_trans-dur-50 $h_trans-timing-fun;
+    }
+  }
+}
+.navbar-toggler:not(.collapsed) {
+  .ham--changeName {
+    .ham__bar {
+
+      &--top {
+        top: calc(50% - #{$base__thick} / 2);
+        transform: rotate(45deg);
+        transition: top         $h_trans-dur-50 $h_trans-timing-fun,
+                    transform   $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun;
+      }
+
+      &--mid {
+        opacity: 0;
+      }
+
+      &--bottom {
+        bottom: calc(50% - #{$base__thick} / 2);
+        transform: rotate(-45deg);
+        transition: bottom      $h_trans-dur-50 $h_trans-timing-fun,
+                    transform   $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun;
+      }
+    }
+  }
+}

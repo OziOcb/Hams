@@ -41,14 +41,14 @@ $h_bg-color: rgba(255, 255, 255, 0.2);                 // Color of the backgroun
 // Border
 $h_bor: false;                                           // Do you want the hamburger to have a border??
 $h_bor-thick: 0px;                                      // Thickness of the border (takes value of $base_thick if it's set to 0px)
-@if $h_bor-thick == 0 { $h_bor-thick: $base__thick; }
-
 $h_bor-color: 0;                                        // Color of the border (takes value of $base_color if it's set to 0)
-@if $h_bor-color == 0 { $h_bor-color: $base__color; }
 $h_bor-radius: 10%;                                     // radius of the border
 
+@if $h_bor-thick == 0 { $h_bor-thick: $base__thick; }
+@if $h_bor-color == 0 { $h_bor-color: $base__color; }
+
 // Transition
-$h_trans-dur: .2s;                                      // Transition duration - full
+$h_trans-dur: .3s;                                      // Transition duration - full
 $h_trans-dur-50: calc(#{$h_trans-dur} / 2);             // Transition duration - 50%
 $h_trans-dur-33: calc(#{$h_trans-dur} / 3);             // Transition duration - 33%
 $h_trans-timing-fun: linear;                            // Transition timing function (ease, ease-in-out, etc.)
@@ -72,11 +72,9 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
   &__bar {
     display: block;
     background: $base__color;
-
     position: absolute;
     height: $h_bar-h;
     width: calc(100% - 2 * #{$base__padding});
-
 
     transition-property: all;
     transition-duration: $h_trans-dur;
@@ -86,7 +84,6 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
     &--mid { top: calc(50% - #{$base__thick} / 2); }
     &--bottom { bottom: 15%; }
   }
-
 
   &.navbar-toggler:not(.collapsed) {
     .ham__bar {
@@ -117,21 +114,13 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
 //──────────────────────────────────────────────────────────────────────────────────────
 //──── Basic ──────────────────────────────────────────────────────────────────────────────────
 /* ------- Basic-r ------- */
-.ham--basic-r {
-  &.navbar-toggler:not(.collapsed) {
-    .ham__bar--mid {
-      transform: translate(25px);
-    }
-  }
+.ham--basic-r.navbar-toggler:not(.collapsed) .ham__bar--mid {
+    transform: translate(25px);
 }
 
 /* ------- Basic-L ------- */
-.ham--basic-l {
-  &.navbar-toggler:not(.collapsed) {
-    .ham__bar--mid {
-      transform: translate(-25px)
-    }
-  }
+.ham--basic-l.navbar-toggler:not(.collapsed) .ham__bar--mid {
+    transform: translate(-25px)
 }
 
 //──────────────────────────────────────────────────────────────────────────────────────
@@ -141,21 +130,13 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
   overflow: hidden;
 }
 /* ------- Smooth-r ------- */
-.ham--smooth-r {
-  &.navbar-toggler:not(.collapsed) {
-    .ham__bar--mid {
-      opacity: 1;
-      width: 0px;
-    }
-  }
+.ham--smooth-r.navbar-toggler:not(.collapsed) .ham__bar--mid {
+  opacity: 1;
+  width: 0px;
 }
-  /* ------- Smooth-l ------- */
-.ham--smooth-l {
-  &.navbar-toggler:not(.collapsed) {
-    .ham__bar--mid {
-      transform: translateX(75px);
-    }
-  }
+/* ------- Smooth-l ------- */
+.ham--smooth-l.navbar-toggler:not(.collapsed) .ham__bar--mid {
+  transform: translateX(75px);
 }
 
 //──────────────────────────────────────────────────────────────────────────────────────
@@ -175,19 +156,28 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
     }
   }
 
-  &.navbar-toggler:not(.collapsed) {
-    .ham__bar {
-      &--top {
-        transition: top         $h_trans-dur-50 $h_trans-timing-fun,
-                    transform   $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun;
-      }
-      &--bottom {
-        transition: bottom      $h_trans-dur-50 $h_trans-timing-fun,
-                    transform   $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun;
-      }
+  &.navbar-toggler:not(.collapsed) .ham__bar {
+    &--top {
+      transition: top         $h_trans-dur-50 $h_trans-timing-fun,
+                  transform   $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun;
+    }
+    &--bottom {
+      transition: bottom      $h_trans-dur-50 $h_trans-timing-fun,
+                  transform   $h_trans-dur-50 $h_trans-dur-50 $h_trans-timing-fun;
     }
   }
 }
+
+/* ------- Fold-alt ------- */
+.ham--fold-alt.navbar-toggler:not(.collapsed) .ham__bar {
+  &--top {
+    transform: rotate(45deg);
+  }
+  &--bottom {
+    transform: rotate(135deg);
+  }
+}
+
 
 
 //──────────────────────────────────────────────────────────────────────────────────────

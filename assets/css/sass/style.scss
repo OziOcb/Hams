@@ -237,29 +237,40 @@ $h_trans-timing-fun: linear;                            // Transition timing fun
 
 
 //──────────────────────────────────────────────────────────────────────────────────────
-//──── changeName ───────────────────────────────────────────────────────────────────────────
-.ham--changeName {
-  .ham__bar {
-    &--top {
-
-    }
-    &--mid {
-
-     }
-    &--bottom {
-
-    }
-  }
-
+//──── vanish ───────────────────────────────────────────────────────────────────────────
+.ham--vanish {
   &.navbar-toggler:not(.collapsed) {
+    animation: fadeOutIn 1s forwards;
+
     .ham__bar {
-      &--top {
+      &--top,
+      &--mid,
+      &--bottom {
+        transition-delay: .4s;
+        animation: slideOutLeft 1s forwards;
+      }
+      &--mid {
+        animation-delay: .1s;
+        animation: slideOutRight 1s forwards;
 
       }
       &--bottom {
-
+        animation-delay: .2s;
       }
     }
+  }
+
+  @keyframes slideOutLeft {
+    50% { margin-left: -20px; }
+    55% { margin-left: 0px; }
+  }
+  @keyframes slideOutRight {
+    50% { margin-left: 20px; }
+    55% { margin-left: 0px; }
+  }
+  @keyframes fadeOutIn {
+    0%, 100% { opacity: 1; }
+    50%, 75% { opacity: 0; }
   }
 }
 
